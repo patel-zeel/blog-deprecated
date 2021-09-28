@@ -116,90 +116,107 @@ window.onload = wrap_img;
 
   <div class="post-content e-content" itemprop="articleBody">
     <ul class="section-nav">
-<li class="toc-entry toc-h1"><a href="#docker-cheatsheet">Docker Cheatsheet</a></li>
-</ul><h1 id="docker-cheatsheet">
-<a class="anchor" href="#docker-cheatsheet" aria-hidden="true"><span class="octicon octicon-link"></span></a>Docker Cheatsheet</h1>
+<li class="toc-entry toc-h2"><a href="#images">Images</a></li>
+<li class="toc-entry toc-h2"><a href="#containers">Containers</a></li>
+<li class="toc-entry toc-h2"><a href="#system">System</a></li>
+</ul><h2 id="images">
+<a class="anchor" href="#images" aria-hidden="true"><span class="octicon octicon-link"></span></a>Images</h2>
 
-<ul>
-  <li>Open a running container’s terminal.
-    <div class="language-bash highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="c">#docker exec -it &lt;container-name&gt; bash</span>
-<span class="nv">$ </span>docker <span class="nb">exec</span> <span class="nt">-it</span> aaai bash <span class="c"># -it stands for interactive</span>
-</code></pre></div>    </div>
-  </li>
-  <li>Execute any command on a running container without opening a shell in container.
-    <div class="language-bash highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="c"># docker exec -it &lt;container-name&gt; &lt;command&gt;</span>
-<span class="nv">$ </span>docker <span class="nb">exec</span> <span class="nt">-it</span> aaai jupyter notebook list
-</code></pre></div>    </div>
-  </li>
-  <li>Check containers
-    <div class="language-bash highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps <span class="c"># shows running containers</span>
-<span class="nv">$ </span>docker ps <span class="nt">-a</span> <span class="c"># shows all containers</span>
-</code></pre></div>    </div>
-  </li>
-  <li>Start or stop a container (default script will be executed with this).
-    <div class="language-bash highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="c"># docker start &lt;container-name&gt;</span>
-<span class="nv">$ </span>docker start aaai <span class="c"># This will start the jupyter notebook server along with the container</span>
-<span class="nv">$ </span><span class="c"># docker stop &lt;container-name&gt; </span>
-<span class="nv">$ </span>docker stop aaai
-</code></pre></div>    </div>
-  </li>
-  <li>Delete a container.
-    <div class="language-bash highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="c"># docker rm &lt;container-name&gt;</span>
-<span class="nv">$ </span>docker <span class="nb">rm </span>aaai
-</code></pre></div>    </div>
-  </li>
-  <li>Check server logs (including shell commands output)
-    <div class="language-bash highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="c"># docker logs &lt;container-name&gt;</span>
-<span class="nv">$ </span>docker logs aaai
-</code></pre></div>    </div>
-  </li>
-  <li>Create a new container from an image
-    <ol>
-      <li>-v: for telling docker to use a shared directory between host and container</li>
-      <li>-p &lt;host-port&gt;&lt;container-port&gt;: is to use port forwarding, an application running on &lt;container-port&gt; can be accessed only with &lt;host-port&gt; in host.</li>
-      <li>–name generates a name for the container for easy reference in other commands</li>
-      <li>–gpus all tells docker to use all GPUs available on host</li>
-      <li>-m Restricts RAM usage</li>
-    </ol>
-  </li>
-</ul>
+<p>One can download (pull) a docker image from <a href="https://hub.docker.com/">Docker Hub</a> or respective websites:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># docker pull &lt;image-name&gt;:&lt;tag&gt;</span>
+docker pull tensorflow/tensorflow:2.4.0-gpu-jupyter
+</code></pre></div></div>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker create tensorflow/tensorflow:2.4.0-gpu-jupyter <span class="c"># Creates new container with random name and other default params</span>
-<span class="nv">$ </span><span class="c"># or</span>
-<span class="nv">$ </span>docker create <span class="se">\</span>
+<p>Check the downloaded images with:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker images
+</code></pre></div></div>
+
+<p>Sometimes we may need to do something on an image without saving or alloting extra space. To create and run a temporary container to be deleted on stopping:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">--rm</span> tensorflow/tensorflow:2.4.0-gpu-jupyter 
+</code></pre></div></div>
+
+<h2 id="containers">
+<a class="anchor" href="#containers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Containers</h2>
+
+<p>Create a new container from an image with following flags</p>
+<ol>
+  <li>
+<code class="language-plaintext highlighter-rouge">-v</code>: for telling docker to use a shared directory between host and container</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">-p \&lt;host-port\&gt;\&lt;container-port\&gt;</code>: is to use port forwarding, an application running on &lt;container-port&gt; can be accessed only with &lt;host-port&gt; in host.</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">--name</code> generates a name for the container for easy reference in other commands</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">--gpus all</code> tells docker to use all GPUs available on host</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">-m</code> Restricts RAM usage</li>
+</ol>
+
+<p>To create new container with default params:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker create tensorflow/tensorflow:2.4.0-gpu-jupyter 
+</code></pre></div></div>
+
+<p>To create new container with manual params:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker create <span class="se">\</span>
 <span class="nt">-v</span> <span class="se">\p</span>ath_in_host:<span class="se">\p</span>ath_in_container <span class="se">\</span>
 <span class="nt">-p9000</span>:8888 <span class="se">\</span>
 <span class="nt">--name</span> aaai <span class="se">\</span>
+<span class="nt">--cpus</span> 2 <span class="se">\</span>
 <span class="nt">--gpus</span> all <span class="se">\</span>
 <span class="nt">-m</span> 100g <span class="se">\</span>
 tensorflow/tensorflow:2.4.0-gpu-jupyter
 </code></pre></div></div>
 
-<ul>
-  <li>Update any of the above configurations.
-    <div class="language-bash highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="c"># change RAM limit to the "aaai" container</span>
-<span class="nv">$ </span>docker update <span class="nt">-m</span> 50g aaai
-</code></pre></div>    </div>
-  </li>
-  <li>Check images currently present within docker
-    <div class="language-bash highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker images
-</code></pre></div>    </div>
-  </li>
-  <li>Download/Pull a docker image from Docker Hub or respective websites.
-    <div class="language-bash highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="c"># docker pull &lt;image-name&gt;:&lt;tag&gt;</span>
-<span class="nv">$ </span>docker pull tensorflow/tensorflow:2.4.0-gpu-jupyter
-</code></pre></div>    </div>
-  </li>
-</ul>
+<p>Update some of the above configurations after container creation:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># change RAM limit of a container named "aaai"</span>
+docker update <span class="nt">-m</span> 50g aaai
+</code></pre></div></div>
+
+<blockquote>
+  <p>Note: In general, changes made to container persist when container is stopped.</p>
+</blockquote>
+
+<p>Check containers:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker ps <span class="c"># shows running containers</span>
+docker ps <span class="nt">-a</span> <span class="c"># shows all containers</span>
+</code></pre></div></div>
+
+<p>Start a container (default script will be executed with this if any):</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># docker start &lt;container-name&gt;</span>
+docker start aaai
+</code></pre></div></div>
+
+<p>Stop a container:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># docker stop &lt;container-name&gt; </span>
+docker stop aaai
+</code></pre></div></div>
+
+<p>Delete a container:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># docker rm &lt;container-name&gt;</span>
+docker <span class="nb">rm </span>aaai
+</code></pre></div></div>
+
+<p>Go to a running container’s shell:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#docker exec -it &lt;container-name&gt; bash</span>
+docker <span class="nb">exec</span> <span class="nt">-it</span> aaai bash <span class="c"># -it stands for interactive</span>
+</code></pre></div></div>
+
+<p>Execute any command on a running container without opening a shell in container:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># docker exec -it &lt;container-name&gt; &lt;command&gt;</span>
+docker <span class="nb">exec</span> <span class="nt">-it</span> aaai jupyter notebook list
+</code></pre></div></div>
+
+<p>Check container logs (including shell commands output):</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># docker logs &lt;container-name&gt;</span>
+docker logs aaai
+</code></pre></div></div>
+
+<h2 id="system">
+<a class="anchor" href="#system" aria-hidden="true"><span class="octicon octicon-link"></span></a>System</h2>
+
+<p>Check all images, all containers and space occupied by them:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker system <span class="nb">df</span> <span class="nt">-v</span>
+</code></pre></div></div>
 
   </div><a class="u-url" href="/blog/markdown/2021/09/28/docker_cheatsheet.html" hidden></a>
 </article>
