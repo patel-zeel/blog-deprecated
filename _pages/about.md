@@ -1,7 +1,5 @@
 ---
 layout: page
 title: About Me
-permalink: /about/
+permalink: /
 ---
-
-[My Webpage](https://patel-zeel.github.io)
