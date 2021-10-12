@@ -73,9 +73,9 @@
   
       ,"page1": {
           "title": "About Me",
-          "content": "My Webpage .",
-          "url": "https://patel-zeel.github.io/blog/about/",
-          "relUrl": "/about/",
+          "content": "",
+          "url": "https://patel-zeel.github.io/blog/",
+          "relUrl": "/",
           "date": ""
       }
       
