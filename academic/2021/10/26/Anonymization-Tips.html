@@ -4,18 +4,20 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Zeel B Patel’s Blog | Tips and Tricks, Techniques and Technology.</title>
+<title>Anonymization tips for double-blind submission | Zeel B Patel’s Blog</title>
 <meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="Zeel B Patel’s Blog" />
+<meta property="og:title" content="Anonymization tips for double-blind submission" />
+<meta name="author" content="Zeel B Patel" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Tips and Tricks, Techniques and Technology." />
-<meta property="og:description" content="Tips and Tricks, Techniques and Technology." />
-<link rel="canonical" href="https://patel-zeel.github.io/blog/" />
-<meta property="og:url" content="https://patel-zeel.github.io/blog/" />
+<meta name="description" content="A last-minute help list" />
+<meta property="og:description" content="A last-minute help list" />
+<link rel="canonical" href="https://patel-zeel.github.io/blog/academic/2021/10/26/Anonymization-Tips.html" />
+<meta property="og:url" content="https://patel-zeel.github.io/blog/academic/2021/10/26/Anonymization-Tips.html" />
 <meta property="og:site_name" content="Zeel B Patel’s Blog" />
-<meta property="og:image" content="https://patel-zeel.github.io/blog/images/logo.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-10-26T00:00:00-05:00" />
 <script type="application/ld+json">
-{"headline":"Zeel B Patel’s Blog","url":"https://patel-zeel.github.io/blog/","image":"https://patel-zeel.github.io/blog/images/logo.png","@type":"WebSite","name":"Zeel B Patel’s Blog","description":"Tips and Tricks, Techniques and Technology.","@context":"https://schema.org"}</script>
+{"headline":"Anonymization tips for double-blind submission","url":"https://patel-zeel.github.io/blog/academic/2021/10/26/Anonymization-Tips.html","dateModified":"2021-10-26T00:00:00-05:00","datePublished":"2021-10-26T00:00:00-05:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://patel-zeel.github.io/blog/academic/2021/10/26/Anonymization-Tips.html"},"author":{"@type":"Person","name":"Zeel B Patel"},"description":"A last-minute help list","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://patel-zeel.github.io/blog/feed.xml" title="Zeel B Patel's Blog" /><!-- the google_analytics_id gets auto inserted from the config file -->
 
@@ -89,113 +91,115 @@ window.onload = wrap_img;
 </header>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <div class="home"><h1 id="posts">Posts</h1>
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Anonymization tips for double-blind submission</h1><p class="page-description">A last-minute help list</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-10-26T00:00:00-05:00" itemprop="datePublished">
+        Oct 26, 2021
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">Zeel B Patel</span></span>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      1 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/blog/categories/#Academic">Academic</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/patel-zeel/blog/tree/master/_notebooks/2021-10-26-Anonymization-Tips.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/blog/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/patel-zeel/blog/master?filepath=_notebooks%2F2021-10-26-Anonymization-Tips.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/blog/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/patel-zeel/blog/blob/master/_notebooks/2021-10-26-Anonymization-Tips.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/blog/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2021-10-26-Anonymization-Tips.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ol>
+<li>
+<p>Use following command locally to search for author names, institute name and other terms you think may violate double-blind</p>
+<div class="highlight"><pre><span></span>git grep &lt;query&gt;
+</pre></div>
+<blockquote>
+<p>Above command matches the query everywhere and thus a safe way. Avoid GitHub search for this purpose, it fails to identify some terms many times and there is no regex there (yet)!</p>
+</blockquote>
+</li>
+<li>
+<p>Do not use full paths inside README file. If you move content in other repo, the links will either become unusable or may violate double-blind. So follow the example below.</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span>-<span class="o">[</span>link<span class="o">](</span>https://github.com/patel-zeel/reponame/blob/master/dataset<span class="o">)</span>+<span class="o">[</span>link<span class="o">](</span>dataset<span class="o">)</span>
+</pre></div>
+<ol>
+<li>
+<p>Point no. 2 does not work for GitHub pages links (username.github.io/stuff). Thus, keep in mind to manually update those (if you have a better idea, let everyone know in comments below)</p>
+</li>
+<li>
+<p>Download the repo zip locally and create an anonymized repository in your anonymized GitHub account. Open the GitHub web editor by pressing "." (dot) at repo homepage.</p>
+</li>
+<li>
+<p>Now, you can select and drag all folders to the left pan of the web editor to upload them at once. Finally, commit with a meaningfull message and the changes will automatically be uploaded to the mail branch of your anonymized repo.</p>
+</li>
+<li>
+<p>Update the link in your manuscipt and submit !!</p>
+</li>
+</ol>
+
+</div>
+</div>
+</div>
+</div>
 
 
 
-
-  
-
-  <!-- Hide posts if front matter flag hide:true -->
-  
-  
-
-  <!-- Sort posts by rank, then date -->
-  
-  
-  
-
- 
-  
-
-   <!-- Assemble final sorted posts array -->
-  
-  <ul class="post-list"><li><div class="Box box-shadow-medium rounded-1 col-12"><div class="col-8 d-table-cell p-3">
-        <h3>
-          <a class="post-link" href="/blog/academic/2021/10/26/Anonymization-Tips.html">
-            Anonymization tips for double-blind submission
-          </a>
-        </h3>
-        <p class="post-meta-description">A last-minute help list</p>
-          <p class="post-meta">Oct 26, 2021</p>
-      </div>
-  </div></li><li><div class="Box box-shadow-medium rounded-1 col-12"><div class="col-8 d-table-cell p-3">
-        <h3>
-          <a class="post-link" href="/blog/ml/2021/10/23/Warped-GP.html">
-            Input Warped GPs - A failed idea
-          </a>
-        </h3>
-        <p class="post-meta-description">An idea of input warping GPs</p>
-          <p class="post-meta">Oct 23, 2021</p>
-      </div>
-  </div></li><li><div class="Box box-shadow-medium rounded-1 col-12"><div class="col-8 d-table-cell p-3">
-        <h3>
-          <a class="post-link" href="/blog/2021/10/12/SparseGPs.html">
-            SparseGPs in Stheno
-          </a>
-        </h3>
-        <p class="post-meta-description">A simple demo of sparse regression in stheno with VFE and FITC methods.</p>
-          <p class="post-meta">Oct 12, 2021</p>
-      </div>
-  </div></li><li><div class="Box box-shadow-medium rounded-1 col-12"><div class="col-8 d-table-cell p-3">
-        <h3>
-          <a class="post-link" href="/blog/markdown/2021/09/28/docker_cheatsheet.html">
-            Docker Cheatsheet
-          </a>
-        </h3>
-        <p class="post-meta-description">Most used command while working with Docker</p>
-          <p class="post-meta">Sep 28, 2021</p>
-      </div>
-  </div></li><li><div class="Box box-shadow-medium rounded-1 col-12"><div class="col-8 d-table-cell p-3">
-        <h3>
-          <a class="post-link" href="/blog/2021/09/27/Constraints.html">
-            How to apply constraint on parameters in various GP libraries
-          </a>
-        </h3>
-        <p class="post-meta-description">Apply constraints in GPy, GPFlow, GPyTorch</p>
-          <p class="post-meta">Sep 27, 2021</p>
-      </div>
-  </div></li><li><div class="Box box-shadow-medium rounded-1 col-12"><div class="col-8 d-table-cell p-3">
-        <h3>
-          <a class="post-link" href="/blog/2021/03/23/bayesian-ml.html">
-            Bayesian ML
-          </a>
-        </h3>
-        <p class="post-meta-description">Bayesian analysis of well-known distributions and simple ML algorithms.</p>
-          <p class="post-meta">Mar 23, 2021</p>
-      </div>
-  </div></li><li><div class="Box box-shadow-medium rounded-1 col-12"><div class="col-8 d-table-cell p-3">
-        <h3>
-          <a class="post-link" href="/blog/ml/2021/03/22/GP_Kernels.html">
-            Understanding Kernels in Gaussian Process
-          </a>
-        </h3>
-        <p class="post-meta-description">An exploratory analysis of kernels in GPs</p>
-          <p class="post-meta">Mar 22, 2021</p>
-      </div>
-  </div></li><li><div class="Box box-shadow-medium rounded-1 col-12"><div class="col-8 d-table-cell p-3">
-        <h3>
-          <a class="post-link" href="/blog/data/openaq/2020/09/21/Programatically_download_OpenAQ_data.html">
-            Programatically download OpenAQ data
-          </a>
-        </h3>
-        <p class="post-meta-description">Programatically download OpenAQ data</p>
-          <p class="post-meta">Sep 21, 2020</p>
-      </div>
-  </div></li><li><div class="Box box-shadow-medium rounded-1 col-12"><div class="col-4 d-table-cell p-3 v-align-middle">
-        <img class="image-preview " src="/blog/images/ALBLR.gif" />
-      </div><div class="col-8 d-table-cell p-3">
-        <h3>
-          <a class="post-link" href="/blog/ml/2020/03/28/Active_Learning_with_Bayesian_Linear_Regression.html">
-            Active Learning with Bayesian Linear Regression
-          </a>
-        </h3>
-        <p class="post-meta-description">A programming introduction to Active Learning with Bayesian Linear Regression.</p>
-          <p class="post-meta">Mar 28, 2020</p>
-      </div>
-  </div></li></ul>
-
-    </div>
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="patel-zeel/blog"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/blog/academic/2021/10/26/Anonymization-Tips.html" hidden></a>
+</article>
       </div>
     </main><footer class="site-footer h-card">
   <data class="u-url" href="/blog/"></data>
