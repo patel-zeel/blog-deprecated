@@ -1,6 +1,7 @@
 ---
 toc: true
 layout: post
+image: images/homepage-docker-logo.png
 description: Most used command while working with Docker 
 categories: [markdown]
 title: Docker Cheatsheet
