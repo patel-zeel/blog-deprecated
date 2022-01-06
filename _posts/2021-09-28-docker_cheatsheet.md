@@ -22,7 +22,7 @@ docker images
 
 Sometimes we may need to do something on an image without saving or alloting extra space. To create and run a temporary container to be deleted on stopping:
 ```bash
-docker run --rm tensorflow/tensorflow:2.4.0-gpu-jupyter 
+docker run --rm -it tensorflow/tensorflow:2.4.0-gpu-jupyter 
 ```
 
 ## Containers
@@ -33,6 +33,7 @@ Create a new container from an image with following flags
   3. ```--name``` generates a name for the container for easy reference in other commands
   4. ```--gpus all``` tells docker to use all GPUs available on host
   5. ```-m``` Restricts RAM usage
+  6. ```-it``` makes sure container awaits after starting instead of instantly shutting down if no startup scripts are configured.
   
 To create new container with default params:
 ```bash
@@ -41,7 +42,7 @@ docker create tensorflow/tensorflow:2.4.0-gpu-jupyter
 
 To create new container with manual params:
 ```bash
-docker create \
+docker create -it \
 -v \path_in_host:\path_in_container \
 -p9000:8888 \
 --name aaai \
