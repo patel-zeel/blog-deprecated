@@ -6,7 +6,7 @@ categories: [markdown]
 title: Why .py files are better than .ipynb files for ML codebase
 ---
 
-I have made the shift from .ipynb files to .py files (and Jupyter to VS code) in the last couple of months. Here are some reasons why I feel .py files are better than .ipynb files especially when working in collaboration:
+I have made the shift from .ipynb files to .py files (and Jupyter to VS code) in the last couple of months. Here are some reasons why I feel .py files are better than .ipynb files:
 
 ## Less Errors
 * .py files are easier to debug with a VS code like IDE which makes it easier to find the errors.
