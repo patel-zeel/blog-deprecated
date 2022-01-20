@@ -57,6 +57,6 @@ $$
 
 ## KL divergence v/s cross-entropy
 
-This shows that for a simple classification problem, KL divergence and cross-entropy will return the same values. Then why do we use cross-entropy as a loss function and not KL divergence?
+This shows that KL divergence and cross-entropy will return the same values for a simple classification problem. Then why do we use cross-entropy as a loss function and not KL divergence?
 
-That's because, KL divergence will compute additional constant terms (zero here) that are not adding any value in minimization. 
+That's because KL divergence will compute additional constant terms (zero here) that are not adding any value in minimization. 
