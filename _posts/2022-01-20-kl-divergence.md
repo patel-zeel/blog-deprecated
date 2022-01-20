@@ -11,6 +11,7 @@ title: KL divergence v/s cross-entropy
 In a classification problem, for a data-point $\mathbf{x}_i$, we have the true label $y_i$ associated with it. 
 
 Let us assume that we have three possible outcomes $\{L1, L2, L3\}$ and for current $\mathbf{x}_i$, corresponding $y_i$ is $L2$. Then **G**round truth probability distribution is the following:
+
 $$
 p_G(y = L1) = 0\\
 p_G(y = L2) = 1\\
@@ -28,6 +29,7 @@ $$
 ## KL divergence
 
 We can use KL divergence to check how good is our model. The formula is:
+
 $$
 D_{KL}(p_G\;\rVert\;p_P) = \sum_{y_i \in \{L1, L2, L3\}} p_G(y_i)\log\frac{p_G(y_i)}{p_P(y_i)} 
 $$
