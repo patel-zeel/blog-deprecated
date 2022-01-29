@@ -47,7 +47,7 @@ docker create -it \
 -p9000:8888 \
 --name aaai \
 --cpus 2 \
---gpus all \
+--gpus all \ # To use specific gpus: --gpu '"device=0,2"'
 -m 100g \
 tensorflow/tensorflow:2.4.0-gpu-jupyter
 ```
