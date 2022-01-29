@@ -100,7 +100,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      1 min read
+      2 min read
     
 </span></p>
 
@@ -165,7 +165,7 @@ docker pull tensorflow/tensorflow:2.4.0-gpu-jupyter
 <span class="nt">-p9000</span>:8888 <span class="se">\</span>
 <span class="nt">--name</span> aaai <span class="se">\</span>
 <span class="nt">--cpus</span> 2 <span class="se">\</span>
-<span class="nt">--gpus</span> all <span class="se">\</span>
+<span class="nt">--gpus</span> all <span class="se">\ </span><span class="c"># To use specific gpus: --gpu '"device=0,2"'</span>
 <span class="nt">-m</span> 100g <span class="se">\</span>
 tensorflow/tensorflow:2.4.0-gpu-jupyter
 </code></pre></div></div>
