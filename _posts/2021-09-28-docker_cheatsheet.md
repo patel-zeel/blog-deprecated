@@ -108,3 +108,15 @@ Check all images, all containers and space occupied by them:
 ```bash
 docker system df -v
 ```
+
+## Set up rootless docker
+
+Refer to this guide: https://docs.docker.com/engine/security/rootless/
+
+Main steps:
+
+* Run `dockerd-rootless-setuptool.sh install`.
+* Setup PATH and DOCKER_HOME as suggested by command output.
+* `systemctl --user restart docker`.
+* Try `docker images` to check if things worked.
+* Try `docker run --rm hello-world` to check if things really worked.
