@@ -120,6 +120,7 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h2"><a href="#images">Images</a></li>
 <li class="toc-entry toc-h2"><a href="#containers">Containers</a></li>
 <li class="toc-entry toc-h2"><a href="#system">System</a></li>
+<li class="toc-entry toc-h2"><a href="#set-up-rootless-docker">Set up rootless docker</a></li>
 </ul><h2 id="images">
 <a class="anchor" href="#images" aria-hidden="true"><span class="octicon octicon-link"></span></a>Images</h2>
 
@@ -220,6 +221,22 @@ docker logs aaai
 <p>Check all images, all containers and space occupied by them:</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker system <span class="nb">df</span> <span class="nt">-v</span>
 </code></pre></div></div>
+
+<h2 id="set-up-rootless-docker">
+<a class="anchor" href="#set-up-rootless-docker" aria-hidden="true"><span class="octicon octicon-link"></span></a>Set up rootless docker</h2>
+
+<p>Refer to this guide: https://docs.docker.com/engine/security/rootless/</p>
+
+<p>Main steps:</p>
+
+<ul>
+  <li>Run <code class="language-plaintext highlighter-rouge">dockerd-rootless-setuptool.sh install</code>.</li>
+  <li>Setup PATH and DOCKER_HOME as suggested by command output.</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">systemctl --user restart docker</code>.</li>
+  <li>Try <code class="language-plaintext highlighter-rouge">docker images</code> to check if things worked.</li>
+  <li>Try <code class="language-plaintext highlighter-rouge">docker run --rm hello-world</code> to check if things really worked.</li>
+</ul>
 
   </div><a class="u-url" href="/blog/markdown/2021/09/28/docker_cheatsheet.html" hidden></a>
 </article>
