@@ -17,3 +17,5 @@ Authors (Underline presenting author, no need to put * incase of equal contribut
 Affiliations
 
 Conference name
+
+* If importing figures from paper, avoid including the captions. 
