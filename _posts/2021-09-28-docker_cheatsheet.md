@@ -32,7 +32,7 @@ Create a new container from an image with following flags
   2. ```-p \<host-port\>\<container-port\>```: is to use port forwarding, an application running on \<container-port\> can be accessed only with \<host-port\> in host.
   3. ```--name``` generates a name for the container for easy reference in other commands
   4. ```--gpus all``` tells docker to use all GPUs available on host
-  5. ```-m``` Restricts RAM usage
+  5. ```--memory-swap``` Restricts RAM+Swap usage
   6. ```-it``` makes sure container awaits after starting instead of instantly shutting down if no startup scripts are configured.
   
 To create new container with default params:
@@ -48,14 +48,14 @@ docker create -it \
 --name aaai \
 --cpus 2 \
 --gpus all \ # To use specific gpus: --gpu '"device=0,2"'
--m 100g \
+--memory-swap 100g \
 tensorflow/tensorflow:2.4.0-gpu-jupyter
 ```
 
 Update some of the above configurations after container creation:
 ```bash
 # change RAM limit of a container named "aaai"
-docker update -m 50g aaai
+docker update --memory-swap 50g aaai
 ```
 
 > Note: In general, changes made to container persist when container is stopped.
