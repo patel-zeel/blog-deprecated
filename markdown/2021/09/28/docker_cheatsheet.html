@@ -151,7 +151,7 @@ docker pull tensorflow/tensorflow:2.4.0-gpu-jupyter
   <li>
 <code class="language-plaintext highlighter-rouge">--gpus all</code> tells docker to use all GPUs available on host</li>
   <li>
-<code class="language-plaintext highlighter-rouge">-m</code> Restricts RAM usage</li>
+<code class="language-plaintext highlighter-rouge">--memory-swap</code> Restricts RAM+Swap usage</li>
   <li>
 <code class="language-plaintext highlighter-rouge">-it</code> makes sure container awaits after starting instead of instantly shutting down if no startup scripts are configured.</li>
 </ol>
@@ -167,13 +167,13 @@ docker pull tensorflow/tensorflow:2.4.0-gpu-jupyter
 <span class="nt">--name</span> aaai <span class="se">\</span>
 <span class="nt">--cpus</span> 2 <span class="se">\</span>
 <span class="nt">--gpus</span> all <span class="se">\ </span><span class="c"># To use specific gpus: --gpu '"device=0,2"'</span>
-<span class="nt">-m</span> 100g <span class="se">\</span>
+<span class="nt">--memory-swap</span> 100g <span class="se">\</span>
 tensorflow/tensorflow:2.4.0-gpu-jupyter
 </code></pre></div></div>
 
 <p>Update some of the above configurations after container creation:</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># change RAM limit of a container named "aaai"</span>
-docker update <span class="nt">-m</span> 50g aaai
+docker update <span class="nt">--memory-swap</span> 50g aaai
 </code></pre></div></div>
 
 <blockquote>
