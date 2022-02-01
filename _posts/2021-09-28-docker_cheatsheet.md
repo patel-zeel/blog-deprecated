@@ -48,7 +48,8 @@ docker create -it \
 --name aaai \
 --cpus 2 \
 --gpus all \ # To use specific gpus: --gpu '"device=0,2"'
---memory-swap 100g \
+--memory 90g \ # Uses 90g memory
+--memory-swap 100g \ # --memory-swap is a modifier flag that only has meaning if --memory is also set. In this case 10g of swap will be used.
 tensorflow/tensorflow:2.4.0-gpu-jupyter
 ```
 
