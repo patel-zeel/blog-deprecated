@@ -167,7 +167,8 @@ docker pull tensorflow/tensorflow:2.4.0-gpu-jupyter
 <span class="nt">--name</span> aaai <span class="se">\</span>
 <span class="nt">--cpus</span> 2 <span class="se">\</span>
 <span class="nt">--gpus</span> all <span class="se">\ </span><span class="c"># To use specific gpus: --gpu '"device=0,2"'</span>
-<span class="nt">--memory-swap</span> 100g <span class="se">\</span>
+<span class="nt">--memory</span> 90g <span class="se">\ </span><span class="c"># Uses 90g memory</span>
+<span class="nt">--memory-swap</span> 100g <span class="se">\ </span><span class="c"># --memory-swap is a modifier flag that only has meaning if --memory is also set. In this case 10g of swap will be used.</span>
 tensorflow/tensorflow:2.4.0-gpu-jupyter
 </code></pre></div></div>
 
