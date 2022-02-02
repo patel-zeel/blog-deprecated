@@ -3,7 +3,7 @@
     
         "post0": {
             "title": "Conference Presentation Tips",
-            "content": "General . First page goes like this: | . Title . Authors (Underline presenting author, no need to put * incase of equal contribution) . Affiliations . Conference name . If importing figures from paper, avoid including the captions. | .",
+            "content": "General . First page goes like this: . Title . | . Authors (Underline presenting author, no need to put * incase of equal contribution) . Affiliations . Conference name . If importing figures from paper, avoid including the captions. | Include lot of images and less maths | Talk should end with summary and not the future work or thank you slide or something. | Cite the references on the same slide in bottom. | . Refere to “Giving talks” section of this blog. . Dos and Don’ts . Never put too detailed information difficult to grasp: a table with many numbers, a complex derivation all in one go, very complicated diagram. | .",
             "url": "https://patel-zeel.github.io/blog/academic/2022/01/29/presentation_tips.html",
             "relUrl": "/academic/2022/01/29/presentation_tips.html",
             "date": " • Jan 29, 2022"
