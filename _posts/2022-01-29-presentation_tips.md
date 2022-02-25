@@ -1,7 +1,7 @@
 ---
 toc: true
 layout: post
-comment: true
+comments: true
 description: Conference Presentation Tips
 categories: [Academic]
 title: Conference Presentation Tips

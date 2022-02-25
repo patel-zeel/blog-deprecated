@@ -1,7 +1,7 @@
 ---
 toc: true
 layout: post
-comment: true
+comments: true
 description: Understanding KL divergence
 categories: [ML]
 title: KL divergence v/s cross-entropy

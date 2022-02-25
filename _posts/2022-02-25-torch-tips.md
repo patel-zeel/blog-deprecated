@@ -1,6 +1,6 @@
 ---
 toc: true
-comment: true
+comments: true
 layout: post
 description: PyTorch zen tips 
 categories: [ml]

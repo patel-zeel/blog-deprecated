@@ -1,6 +1,6 @@
 ---
 toc: true
-comment: true
+comments: true
 layout: post
 image: images/homepage-docker-logo.png
 description: Most used command while working with Docker 

@@ -1,7 +1,7 @@
 ---
 toc: true
 layout: post
-comment: true
+comments: true
 description: Where .py files are better than .ipynb files?
 categories: [markdown]
 title: Why .py files are better than .ipynb files for ML codebase
