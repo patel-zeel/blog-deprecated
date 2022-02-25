@@ -1,4 +1,12 @@
-# PyTorch Tips
+---
+toc: true
+comment: true
+layout: post
+description: PyTorch zen tips 
+categories: [ml]
+title: PyTorch Tips
+---
+
 
 Several tips for building `torch` models from scratch from my experience. Some of the tips are like zen, they are not immediately intuitive but useful for efficient code.
 
