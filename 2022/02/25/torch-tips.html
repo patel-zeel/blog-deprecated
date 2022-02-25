@@ -1,0 +1,48 @@
+<h1 id="pytorch-tips">PyTorch Tips</h1>
+
+<p>Several tips for building <code class="language-plaintext highlighter-rouge">torch</code> models from scratch from my experience. Some of the tips are like zen, they are not immediately intuitive but useful for efficient code.</p>
+
+<ul>
+  <li>
+    <p>All the initializations or new tensor creation should only happen in <code class="language-plaintext highlighter-rouge">__init__</code> method. During the <code class="language-plaintext highlighter-rouge">forward()</code> call, ideally no new tensors should be created from scratch such as <code class="language-plaintext highlighter-rouge">torch.zeros()</code>, <code class="language-plaintext highlighter-rouge">torch.ones()</code> etc.
+<strong>Reason:</strong> Violating this can sometimes brake your forward pass and end-to-end backprop may become buggy.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">.cuda()</code> and <code class="language-plaintext highlighter-rouge">.cpu()</code> are discouraged, use <code class="language-plaintext highlighter-rouge">.to(device)</code> instead.
+<strong>Reason:</strong> <code class="language-plaintext highlighter-rouge">.to(device)</code> is more dynamic and scalable.</p>
+  </li>
+  <li>
+    <p>Do not save models with <code class="language-plaintext highlighter-rouge">torch.save(model)</code>, that may become incompaitable with different torch versions and may take more memory. Save <code class="language-plaintext highlighter-rouge">torch.save(model.state_dict())</code> instead.</p>
+  </li>
+  <li>
+    <p>Need to set parameter names dynamically? Use this example, <code class="language-plaintext highlighter-rouge">zero=0;self.register_parameter(f"name_{zero}")</code>. They can be accessed with <code class="language-plaintext highlighter-rouge">model.name_0</code>.</p>
+  </li>
+  <li>
+    <p>Have something in model which is necessary for forward pass but does not require backprop? define those variables with <code class="language-plaintext highlighter-rouge">self.register_buffer</code>.</p>
+  </li>
+  <li>Let <code class="language-plaintext highlighter-rouge">.to(device)</code> to be set outside the model defition.
+<strong>Reason:</strong> It is less confusing to the users this way and it is less messy with internal tools to set device such as:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">module.to(deivce)</code> sends all parameters and buffers of model/submodules to the device.</li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">module.float()</code> or <code class="language-plaintext highlighter-rouge">module.double()</code> will convert all model/submodule parameters and buffers into <code class="language-plaintext highlighter-rouge">float32</code> and <code class="language-plaintext highlighter-rouge">float64</code> respectively.</p>
+  </li>
+  <li>
+    <p>Let <code class="language-plaintext highlighter-rouge">.train()</code> and <code class="language-plaintext highlighter-rouge">.eval()</code> to be set outside the model defition or set by user. 
+<strong>Reason:</strong> It can be confusing to user if these things are used inside the model against torch conventions.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">torch.no_grad()</code> should not be used within the model.
+<strong>Reason:</strong> Sometimes user may want to backprop through that chunk of code.</p>
+  </li>
+  <li>Link the multiple modules togather.
+<strong>Reason:</strong> Ideally, it is useful if model is built like a assembled product (say a car). You should be able to replace the parts as per your requirement. Several benefits on these lines are:
+    <ul>
+      <li>setting <code class="language-plaintext highlighter-rouge">module.train()</code> or <code class="language-plaintext highlighter-rouge">module.eval()</code> puts all submodules in train mode or eval mode respectively.</li>
+      <li>All submodules parameters can be accesses directly from the parent module with <code class="language-plaintext highlighter-rouge">module.parameters()</code>.</li>
+    </ul>
+  </li>
+  <li>Creating a list of parameters in model <code class="language-plaintext highlighter-rouge">__init__</code> definition? consider <code class="language-plaintext highlighter-rouge">torch.nn.ModuleList(params)</code> else individual parameters in the list will not be recognized as parameters.</li>
+</ul>
