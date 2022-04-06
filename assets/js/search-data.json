@@ -15,8 +15,8 @@
         ,"post1": {
             "title": "GitHub Contrubuting FAQs",
             "content": "Q1: What is an efficient way to work on multiple issues at once? . Create separate branches for each issue. Do not work on the master branch. . Q1.1: Why not? . We will see that in Q5. . Q2: What to do if the main (or master) gets updated before I open a PR? . Pull the changes directly to your branch with: . git pull https://github.com/probml/pyprobml . Q3: What to do with the fork&#39;s main when the original main is updated? . Fetch upstream with GitHub GUI or use the same solution given in Q2. . Q4: Why and when keeping the fork&#39;s main up to date with the original main is important? . Whenever we need to create new branches (usually from the fork&#39;s main). . Q5: How to update a change in a PR that is open? . Push the change to the corresponding branch and PR will get updated automatically. .",
-            "url": "https://patel-zeel.github.io/blog/2022/04/05/_04_06_GitHub_FAQs.html",
-            "relUrl": "/2022/04/05/_04_06_GitHub_FAQs.html",
+            "url": "https://patel-zeel.github.io/blog/github/2022/04/05/_04_06_GitHub_FAQs.html",
+            "relUrl": "/github/2022/04/05/_04_06_GitHub_FAQs.html",
             "date": " • Apr 5, 2022"
         }
         
