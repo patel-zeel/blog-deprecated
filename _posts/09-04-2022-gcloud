@@ -1,0 +1,13 @@
+---
+toc: true
+comments: true
+layout: post
+description: Most used commands while working with gcloud
+categories: [markdown]
+title: Gcloud cheatsheet
+---
+
+* To get project and region related info
+```
+gcloud info
+```
