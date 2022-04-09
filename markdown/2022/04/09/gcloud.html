@@ -131,12 +131,12 @@ gcloud config set project your-project-id
 gcloud config set compute/zone us-central1-f  # us-central1-f for free v2 TPUs and europe-west4-a for free v3 TPUs (only if you have free TRC access)
 </code></pre></div>    </div>
   </li>
-  <li>To get currently active project and region related info:
+  <li>To get currently active project and zone related info:
     <div class="language-plaintext highlighter-rouge">
 <div class="highlight"><pre class="highlight"><code>gcloud info
 </code></pre></div>    </div>
   </li>
-  <li>To Create identity (I don’t know if this is required or not. This command should trigger installation of “gcloud Beta Commands” automatically in another shell and then you need to rerun the following command):
+  <li>To create an identity (I don’t know if this is required or not. This command should trigger installation of “gcloud Beta Commands” automatically in another shell and then you need to rerun the following command):
     <div class="language-plaintext highlighter-rouge">
 <div class="highlight"><pre class="highlight"><code>gcloud beta services identity create --service tpu.googleapis.com
 </code></pre></div>    </div>
@@ -150,7 +150,7 @@ gcloud config set compute/zone us-central1-f  # us-central1-f for free v2 TPUs a
 <p><img width="512" alt="image" src="https://user-images.githubusercontent.com/59758528/162559104-fadd6d54-c2ec-4117-8d92-2094643c46f6.png"></p>
 
 <ul>
-  <li>To create TPU VM in preferred zone via CLI (be careful about the <code class="language-plaintext highlighter-rouge">--zone</code> to avoid charges. if <code class="language-plaintext highlighter-rouge">--zone</code> is not passed, VM will be created in the default zone that we set initially. This command triggered installation of “gcloud Alpha Commands”):
+  <li>To create a TPU VM in preferred zone via CLI (be careful about the <code class="language-plaintext highlighter-rouge">--zone</code> to avoid charges, check the first email received from TRC team to see what kind of TPUs are free in different zones. if <code class="language-plaintext highlighter-rouge">--zone</code> is not passed, VM will be created in the default zone that we set initially. This command triggered installation of “gcloud Alpha Commands”):
     <div class="language-plaintext highlighter-rouge">
 <div class="highlight"><pre class="highlight"><code>gcloud alpha compute tpus tpu-vm create vm-1 --accelerator-type v2-8 --version tpu-vm-tf-2.8.0 --zone us-central1-f
 </code></pre></div>    </div>
@@ -165,7 +165,7 @@ gcloud config set compute/zone us-central1-f  # us-central1-f for free v2 TPUs a
 <div class="highlight"><pre class="highlight"><code>gcloud compute tpus delete vm-1
 </code></pre></div>    </div>
   </li>
-  <li>To connect with a vm via ssh:
+  <li>To connect with a vm via ssh (this automatically creates ssh key pair and places in default ssh config location):
     <div class="language-plaintext highlighter-rouge">
 <div class="highlight"><pre class="highlight"><code>gcloud alpha compute tpus tpu-vm ssh vm-1
 </code></pre></div>    </div>
