@@ -3,7 +3,7 @@
     
         "post0": {
             "title": "Gcloud cheatsheet",
-            "content": "Initial setup . Set email and project-id gcloud config set account your-email-account gcloud config set project your-project-id gcloud config set compute/zone us-central1-f # us-central1-f for free v2 TPUs and europe-west4-a for free v3 TPUs (only if you have free TRC access) . | To get currently active project and region related info gcloud info . | .",
+            "content": "Initial setup . Set default email, project-id &amp; region gcloud config set account your-email-account gcloud config set project your-project-id gcloud config set compute/zone us-central1-f # us-central1-f for free v2 TPUs and europe-west4-a for free v3 TPUs (only if you have free TRC access) . | To get currently active project and region related info gcloud info . | .",
             "url": "https://patel-zeel.github.io/blog/markdown/2022/04/09/gcloud.html",
             "relUrl": "/markdown/2022/04/09/gcloud.html",
             "date": " • Apr 9, 2022"
