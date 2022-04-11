@@ -185,8 +185,14 @@ gcloud config set compute/zone us-central1-f  # us-central1-f for free v2 TPUs a
 <img width="350" alt="image" src="https://user-images.githubusercontent.com/59758528/162791286-ca780943-e8d5-4619-91b5-0978743141f5.png"></p>
   </li>
   <li>
-    <p>Manually update the default ssh config file (in my case, “C:\Users\zeelp\.ssh”) to add a VM in VS-code. Note that ssh public-private key pair with name <code class="language-plaintext highlighter-rouge">google_compute_engine</code> is automatically generated when you connect with the VM for the first time with <code class="language-plaintext highlighter-rouge">gcloud alpha compute tpus tpu-vm ssh</code> command. The VM config for me looks like this:</p>
+    <p>Manually update the default ssh config file (in my case, “C:\Users\zeelp\.ssh”) to add a VM in VS-code (you can use VS-code command pallate to figure out the config file for you and edit it. Please see the screeshot below).</p>
   </li>
+</ul>
+
+<p><img width="457" alt="image" src="https://user-images.githubusercontent.com/59758528/162791831-d18031be-9714-4857-afad-ad809bed701e.png"></p>
+
+<ul>
+  <li>Note that ssh public-private key pair with name <code class="language-plaintext highlighter-rouge">google_compute_engine</code> is automatically generated when you connect with the VM for the first time with <code class="language-plaintext highlighter-rouge">gcloud alpha compute tpus tpu-vm ssh</code> command. The VM config for me looks like this:</li>
 </ul>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Host Cloud-TPU-Node-2
