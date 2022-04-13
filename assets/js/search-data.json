@@ -4,9 +4,9 @@
         "post0": {
             "title": "Uncertainty in Deep Learning",
             "content": "import torch . 1 - Introduction . An online deep learning book from Ian Goodfellow, Yoshua Bengio, and Aaron Courville. | . 1.1 - Deep Learning . We define a single layer network as the following: . class SingleLayerNetwork(torch.nn.Module): def __init__(self, Q, D, K): &quot;&quot;&quot; Q: number of features D: number of outputs K: number of hidden features &quot;&quot;&quot; super().__init__() self.input = torch.nn.Linear(Q, K) # Transforms Q features into K hidden features self.output = torch.nn.Linear(K, D) # Transforms K hidden features to D output features self.non_lin_transform = torch.nn.ReLU() # A non-linear transformation def forward(self, X): &quot;&quot;&quot; X: input (N x Q) &quot;&quot;&quot; self.linear_transformed_X = self.input(X) # (N, Q) -&gt; (N, K) self.non_lin_transformed_X = self.non_lin_transform(linear_transformed_X) # (N, K) -&gt; (N, K) output = self.output(self.non_lin_transformed_X) # (N, K) -&gt; (N, D) return output . Q = 10 # Number of features N = 100 # Number of samples D = 15 # Number of outputs K = 32 # Number of hidden features X = torch.rand(N, Q) # Input Y = torch.rand(N, D) # Output . model = SingleLayerNetwork(Q=Q, D=D, K=K) model . SingleLayerNetwork( (input): Linear(in_features=10, out_features=32, bias=True) (output): Linear(in_features=32, out_features=15, bias=True) (non_lin_transform): ReLU() ) . for name, value in model.named_parameters(): print(name, value.shape) . input.weight torch.Size([32, 10]) input.bias torch.Size([32]) output.weight torch.Size([15, 32]) output.bias torch.Size([15]) . ReLU is does not contain any parameters here so it is merely a function. . 1.2 Model Uncertainty . In which cases we want our model to be uncertain? . When it encounters a out-of-the-distribution data | When training data is noisy (irreducible/aleatoric uncertainty) | When we have multiple predictors (model/epistemic uncertainty) | .",
-            "url": "https://patel-zeel.github.io/blog/ml/2022/04/10/uncertainty-in-deep-learning.html",
-            "relUrl": "/ml/2022/04/10/uncertainty-in-deep-learning.html",
-            "date": " • Apr 10, 2022"
+            "url": "https://patel-zeel.github.io/blog/ml/2022/04/12/uncertainty-in-deep-learning.html",
+            "relUrl": "/ml/2022/04/12/uncertainty-in-deep-learning.html",
+            "date": " • Apr 12, 2022"
         }
         
     
@@ -15,9 +15,9 @@
         ,"post1": {
             "title": "GitHub Contrubuting FAQs",
             "content": "Q1: What is an efficient way to work on multiple issues at once? . Create separate branches for each issue. Do not work on the master branch. . Q1.1: Why not? . We will see that in Q5. . Q2: What to do if the main (or master) gets updated before I open a PR? . Pull the changes directly to your branch with: . git pull https://github.com/probml/pyprobml . Q3: What to do with the fork&#39;s main when the original main is updated? . Fetch upstream with GitHub GUI or use the same solution given in Q2. . Q4: Why and when keeping the fork&#39;s main up to date with the original main is important? . Whenever we need to create new branches (usually from the fork&#39;s main). . Q5: How to update a change in a PR that is open? . Push the change to the corresponding branch and PR will get updated automatically. .",
-            "url": "https://patel-zeel.github.io/blog/github/2022/04/10/_04_06_GitHub_FAQs.html",
-            "relUrl": "/github/2022/04/10/_04_06_GitHub_FAQs.html",
-            "date": " • Apr 10, 2022"
+            "url": "https://patel-zeel.github.io/blog/github/2022/04/12/_04_06_GitHub_FAQs.html",
+            "relUrl": "/github/2022/04/12/_04_06_GitHub_FAQs.html",
+            "date": " • Apr 12, 2022"
         }
         
     
