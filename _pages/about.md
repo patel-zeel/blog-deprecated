@@ -1,5 +1,5 @@
 ---
 layout: page
 title: About Me
-permalink: ../
+permalink: https://patel-zeel.github.io/
 ---
