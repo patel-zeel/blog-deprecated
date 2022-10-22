@@ -191,16 +191,20 @@ window.onload = wrap_img;
 </h2>
 <p>In this post, we will consider the regression problem of finding a reasonable map $X \to \boldsymbol{y}$ along with uncertainty. We can do this in a simplest setting with Bayesian linear regression assuming a <strong>M</strong>ulti<strong>V</strong>ariate <strong>N</strong>ormal (MVN) prior $\boldsymbol{\theta} \sim \mathcal{N}(\boldsymbol{\mu}_\theta, \Sigma_\theta)$ (why MVN? because $\theta \in (-\infty, \infty)$) and Normal likelihood $y \sim \mathcal{N}(\boldsymbol{x}^T\theta, \sigma_n^2)$ with i.i.d. assumption.</p>
 <p>To start with Gaussian process regression, let us first focus on $\boldsymbol{y}$ (and ignore $X$). We assume $\boldsymbol{f}$ as a random variable and $\boldsymbol{y}$ as a realization of $\boldsymbol{f}$ with some noise. It would be a natural probabilistic assumption to assume $\boldsymbol{f}$ to be MVN distributed since its range is $(-\infty, \infty)$.</p>
+$$
 \begin{equation}
 p(\boldsymbol{f}) \sim \mathcal{N}(\boldsymbol{m}_f, K_{ff})
 \tag{prior}
-\end{equation}<p>Now, we need to bring in $X$ in a reasonable way to this formulation. A core assumption connecting $X$ with $\boldsymbol{y}$ is the following:</p>
+\end{equation}
+$$<p>Now, we need to bring in $X$ in a reasonable way to this formulation. A core assumption connecting $X$ with $\boldsymbol{y}$ is the following:</p>
 <blockquote>
 <p>if two inputs $\boldsymbol{x}$ and $\boldsymbol{x}'$ are close to each other (how to define the closeness? kernels!), corresponding $\boldsymbol{y}$ and $\boldsymbol{y}'$ are likely to be similar.</p>
 </blockquote>
-<p>We use something known as covariance function or kernel (later is more prevalent) to define this closeness. For example, RBF or squared exponential is a well-known kernel:\begin{equation}k_{RBF}(\boldsymbol{x}, \boldsymbol{x}') = \sigma^2 \exp \left(-{\frac {\|\boldsymbol{x} -\boldsymbol{x}' \|^{2}}{2\ell ^{2}}}\right)
+<p>We use something known as covariance function or kernel (later is more prevalent) to define this closeness. For example, RBF or squared exponential is a well-known kernel:$$\begin{equation}
+k_{RBF}(\boldsymbol{x}, \boldsymbol{x}') = \sigma^2 \exp \left(-{\frac {\|\boldsymbol{x} -\boldsymbol{x}' \|^{2}}{2\ell ^{2}}}\right)
 \tag{kernel}
-\end{equation}</p>
+\end{equation}
+$$</p>
 
 </div>
 </div>
@@ -252,28 +256,39 @@ p(\boldsymbol{f}) \sim \mathcal{N}(\boldsymbol{m}_f, K_{ff})
 <li>Non-diagonal entries of $K_{ff}$ represent covariance between $f_i$ and $f_j$ and can be represented by $k(\boldsymbol{x}_i, \boldsymbol{x}_j)$.</li>
 </ol>
 <p>At this point, we have made everything clear about prior $p(\boldsymbol{f}) \sim \mathcal{N}(\boldsymbol{m}_f, K_{ff})$. Now, we will look at the likelihood. As mentioned earlier, $\boldsymbol{y}$ is noisy realization of $f$ so the following likelihood would be a simple and natural choice.</p>
+$$
 \begin{equation}
 p(\boldsymbol{y}|\boldsymbol{f}) \sim \mathcal{N}(\boldsymbol{f}, \sigma_n^2I)
 \tag{likelihood}
-\end{equation}<p>Till now, we followed bottom-up approach and defined prior and likelihood for this problem. Now we will explore the top-down approach.</p>
+\end{equation}
+$$<p>Till now, we followed bottom-up approach and defined prior and likelihood for this problem. Now we will explore the top-down approach.</p>
 <p>Our ultimate goal is derive $p(\boldsymbol{y}^*|X^*,\boldsymbol{y}, X)$ at new inputs $X^*$. This can be written as:</p>
+$$
 \begin{equation}
 p(\boldsymbol{y}^*|X^*,\boldsymbol{y}, X) = \int p(\boldsymbol{y}^*|\boldsymbol{f}^*)p(\boldsymbol{f}^*|X^*,\boldsymbol{y}, X)d\boldsymbol{f}^*
 \tag{pred post new}
-\end{equation}<p>Here, $p(\boldsymbol{f}^*|X^*,\boldsymbol{y}, X)$ is the posterior distribution at inputs $X^*$. Once we derive posterior $p(\boldsymbol{f}|\boldsymbol{y},X)$, We can find $p(\boldsymbol{f}^*|X^*,\boldsymbol{y}, X)$ like following:</p>
+\end{equation}
+$$<p>Here, $p(\boldsymbol{f}^*|X^*,\boldsymbol{y}, X)$ is the posterior distribution at inputs $X^*$. Once we derive posterior $p(\boldsymbol{f}|\boldsymbol{y},X)$, We can find $p(\boldsymbol{f}^*|X^*,\boldsymbol{y}, X)$ like following:</p>
+$$
 \begin{equation}
 p(\boldsymbol{f}^*|X^*, \boldsymbol{y}, X) = \int p(\boldsymbol{f}^*|X^*, \boldsymbol{f}, X)p(\boldsymbol{f}|\boldsymbol{y}, X)d\boldsymbol{f}
 \tag{post new}
-\end{equation}<p>Here, $p(\boldsymbol{f}^*|X^*, \boldsymbol{f}, X)$ is a <a href="https://en.wikipedia.org/wiki/Multivariate_normal_distribution#Conditional_distributions">conditional Gaussian distribution</a> with the following closed form:</p>
+\end{equation}
+$$<p>Here, $p(\boldsymbol{f}^*|X^*, \boldsymbol{f}, X)$ is a <a href="https://en.wikipedia.org/wiki/Multivariate_normal_distribution#Conditional_distributions">conditional Gaussian distribution</a> with the following closed form:</p>
+$$
 \begin{equation}
 p(\boldsymbol{f}^*|X^*, \boldsymbol{f}, X) \sim \mathcal{N}(\boldsymbol{m}_{f^*}+K_{f^*f}K_{ff}^{-1}(\boldsymbol{f}-\boldsymbol{m}_{f}), K_{f^*f^*} - K_{f^*f}K_{ff}^{-1}K_{ff^*})
 \tag{cond}
-\end{equation}<p>Posterior $p(\boldsymbol{f}|\boldsymbol{y}, X)$ can be derived following "Bayes' rule for Gaussians" (section 2.2.6.2 in <a href="https://probml.github.io/pml-book/book2.html">pml book2</a>):</p>
+\end{equation}
+$$<p>Posterior $p(\boldsymbol{f}|\boldsymbol{y}, X)$ can be derived following "Bayes' rule for Gaussians" (section 2.2.6.2 in <a href="https://probml.github.io/pml-book/book2.html">pml book2</a>):</p>
+$$
 \begin{equation}
 p(\boldsymbol{f}|\boldsymbol{y}, X) \sim \mathcal{N}(\boldsymbol{m}_f + K_{ff}\left(K_{ff}+\sigma_n^2I\right)^{-1}(\boldsymbol{y} - \boldsymbol{m}_f), K_{ff} - K_{ff}\left(K_{ff} + \sigma_n^2I\right)^{-1}K_{ff})
 \tag{post}
-\end{equation}<p>We can now substitute Eq. (post) and Eq. (cond) in Eq. (post new). The integral can be solved with using Eq. 2.90 in section 2.2.6.2 in <a href="https://probml.github.io/pml-book/book2.html">pml book2</a> and also mentioned in Eq. (int gaussians) in Appendix.</p>
-\begin{align}
+\end{equation}
+$$<p>We can now substitute Eq. (post) and Eq. (cond) in Eq. (post new). The integral can be solved with using Eq. 2.90 in section 2.2.6.2 in <a href="https://probml.github.io/pml-book/book2.html">pml book2</a> and also mentioned in Eq. (int gaussians) in Appendix.</p>
+$$
+\begin{aligned}
 p(\boldsymbol{f}^*|X^*, \boldsymbol{y}, X) &amp;\sim \mathcal{N}(\boldsymbol{\mu}^*, \Sigma^*)\\
 \boldsymbol{\mu}^* &amp;= \boldsymbol{m}_{f^*}+K_{f^*f}K_{ff}^{-1}(\left[\boldsymbol{m}_f + K_{ff}\left(K_{ff}+\sigma_n^2I\right)^{-1}(\boldsymbol{y} - \boldsymbol{m}_f)\right]-\boldsymbol{m}_{f})\\
 &amp;=\boldsymbol{m}_{f^*}+K_{f^*f}K_{ff}^{-1}(K_{ff}\left(K_{ff}+\sigma_n^2I\right)^{-1}(\boldsymbol{y} - \boldsymbol{m}_f))\\
@@ -285,10 +300,13 @@ p(\boldsymbol{f}^*|X^*, \boldsymbol{y}, X) &amp;\sim \mathcal{N}(\boldsymbol{\mu
 &amp;=K_{f^*f^*} - K_{f^*f}K_{ff}^{-1}K_{ff^*} + K_{f^*f}K_{ff}^{-1}K_{ff^*} - K_{f^*f}\left(K_{ff} + \sigma_n^2I\right)^{-1}K_{ff^*}\\
 &amp;=K_{f^*f^*} - K_{f^*f}\left(K_{ff} + \sigma_n^2I\right)^{-1}K_{ff^*}\\
 p(\boldsymbol{f}^*|X^*, \boldsymbol{y}, X) &amp;\sim \mathcal{N}(\boldsymbol{m}_{f^*}+K_{f^*f}\left(K_{ff}+\sigma_n^2I\right)^{-1}(\boldsymbol{y} - \boldsymbol{m}_f), K_{f^*f^*} - K_{f^*f}\left(K_{ff} + \sigma_n^2I\right)^{-1}K_{ff^*})
-\end{align}<p>Now, we are almost there. Plugging in the above formula in Eq. (pred post) and using known result in Eq. (int gaussians), we get the predictive posterior as following:</p>
+\end{aligned}
+$$<p>Now, we are almost there. Plugging in the above formula in Eq. (pred post) and using known result in Eq. (int gaussians), we get the predictive posterior as following:</p>
+$$
 \begin{equation}
 p(\boldsymbol{y}^*|X^*,\boldsymbol{y}, X) \sim \mathcal{N}(\boldsymbol{m}_{f^*}+K_{f^*f}\left(K_{ff}+\sigma_n^2I\right)^{-1}(\boldsymbol{y} - \boldsymbol{m}_f), K_{f^*f^*} - K_{f^*f}\left(K_{ff} + \sigma_n^2I\right)^{-1}K_{ff^*} + \sigma_n^2I)
-\end{equation}<p></p>
+\end{equation}
+$$<p></p>
 <div class="flash">
     <svg class="octicon octicon-info" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"></path></svg>
     <strong>Note: </strong>We did not exploit the special structure of likelihood variance $\sigma_n^2I$ anywhere, so, these derivations hold true for full rank likelihood covariance matrices also.
@@ -297,11 +315,13 @@ p(\boldsymbol{y}^*|X^*,\boldsymbol{y}, X) \sim \mathcal{N}(\boldsymbol{m}_{f^*}+
 <a class="anchor" href="#Optimization" aria-hidden="true"><span class="octicon octicon-link"></span></a>Optimization<a class="anchor-link" href="#Optimization"> </a>
 </h3>
 <p>We perform type-II likelihood estimation (in other words, minimize log marginal likelihood or evidence term). Our goal is to find optimal model $\mathcal{M}$ represented by prior (or kernel) hyperparameters and likelihood hyperparameters. We can get the log marginal likelihood using Eq. (int gaussians):</p>
-\begin{align}
+$$
+\begin{aligned}
 p(\boldsymbol{y}|X, \mathcal{M}) &amp;= \int p(\boldsymbol{y}|\boldsymbol{f}) p(\boldsymbol{f})d\boldsymbol{f}\\
 &amp;\sim \int \mathcal{N}(\boldsymbol{y}|\boldsymbol{f}, \sigma_n^2I) \mathcal{N}(\boldsymbol{f}|\boldsymbol{m}_f, K_{ff})\\
 &amp;\sim \mathcal{N}(\boldsymbol{y}|\boldsymbol{m}_f, K_{ff}+\sigma_n^2I)
-\end{align}<p>For case of RBF kernel, $\mathcal{M}$ parameters will be $\{\sigma, \ell, \sigma_n\}$.</p>
+\end{aligned}
+$$<p>For case of RBF kernel, $\mathcal{M}$ parameters will be $\{\sigma, \ell, \sigma_n\}$.</p>
 
 </div>
 </div>
@@ -319,31 +339,41 @@ p(\boldsymbol{y}|X, \mathcal{M}) &amp;= \int p(\boldsymbol{y}|\boldsymbol{f}) p(
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We will derive a GP predictive posterior for binary case only because for multi-class, it gets a bit complex. Our assumption for prior over the $\boldsymbol{f}$ can still be the same but likelihood needs to be changed because $\boldsymbol{y}$ is no more a real number but rather a binary value e.g. 0 or 1. From Bayesian point-of-view, Bernoulli likelihood would be the most appropriate as a likelihood here:</p>
+$$
 \begin{equation}
 p(\boldsymbol{y}|\boldsymbol{f}) = \prod_{i=1}^{N} \sigma(f_i)^{y_i=1}(1-\sigma(f_i))^{y_i=0}
 \tag{class likelihood}
-\end{equation}<p>Since, MVN prior and Bernoulli likelihood are not conjugate, we need to use an approximate method of inference here. We use Laplace approximation to get the MAP estimate $\boldsymbol{\hat{f}}$ and by computing the Hessian $H$ of negative log joint (log prior + log likelihood) with respect to $\boldsymbol{\hat{f}}$, we can get the posterior distribution as the following:</p>
+\end{equation}
+$$<p>Since, MVN prior and Bernoulli likelihood are not conjugate, we need to use an approximate method of inference here. We use Laplace approximation to get the MAP estimate $\boldsymbol{\hat{f}}$ and by computing the Hessian $H$ of negative log joint (log prior + log likelihood) with respect to $\boldsymbol{\hat{f}}$, we can get the posterior distribution as the following:</p>
+$$
 \begin{equation}
 p(\boldsymbol{f}|\boldsymbol{y}, X) \sim \mathcal{N}(\boldsymbol{\hat{f}}, H^{-1})
 \tag{class post}
-\end{equation}<p>Eq. (cond) will be the same in this case, and thus, we can solve Eq. (post new) as we did for regression case, like the following:</p>
+\end{equation}
+$$<p>Eq. (cond) will be the same in this case, and thus, we can solve Eq. (post new) as we did for regression case, like the following:</p>
+$$
 \begin{equation}
 p(\boldsymbol{f}^*|X^*, \boldsymbol{y}, X) \sim \mathcal{N}(\boldsymbol{m}_{f^*}+K_{f^*f}K_{ff}^{-1}(\boldsymbol{\hat{f}}-\boldsymbol{m}_{f}), K_{f^*f^*} - K_{f^*f}K_{ff}^{-1}K_{ff^*} + K_{f^*f}K_{ff}^{-1}H^{-1}K_{ff}^{-1}K_{ff^*})
-\end{equation}<h3 id="Optimization">
+\end{equation}
+$$<h3 id="Optimization">
 <a class="anchor" href="#Optimization" aria-hidden="true"><span class="octicon octicon-link"></span></a>Optimization<a class="anchor-link" href="#Optimization"> </a>
 </h3>
 <p>To perform Type-II likelihood estimation for binary classification, we first need to derive the log marginal likelihood which can be approximated with Laplace approximation. First, we define the following quantity:</p>
+$$
 \begin{equation}
 \boldsymbol{\psi}(\boldsymbol{f}) \triangleq \log p(\boldsymbol{y}|\boldsymbol{f}) + \log p(\boldsymbol{f})
-\end{equation}<p>Now, computing the log marginal likelihood as suggested in section 3.4.4 of <a href="https://gaussianprocess.org/gpml/chapters/RW.pdf">GPML book</a>:</p>
-\begin{align}
-\log p(\boldsymbol{y}|X, \mathcal{M}) &amp;\sim \int p(\boldsymbol{y}|\boldsymbol{f}) p(\boldsymbol{f})d\boldsymbol{f}\\
-&amp;= \log \int \exp\left(\boldsymbol{\psi}(\boldsymbol{f})\right)d\boldsymbol{f}\\
-&amp;\thickapprox \log \int \exp\left(\boldsymbol{\psi}(\boldsymbol{\hat{f}}) -\frac{1}{2}(\mathbf{f}-\hat{\mathbf{f}})^{\top} H(\mathbf{f}-\hat{\mathbf{f}})\right)d\boldsymbol{f}\\
-&amp;= \log \exp \boldsymbol{\psi}(\boldsymbol{\hat{f}}) \int exp\left(-\frac{1}{2}(\mathbf{f}-\hat{\mathbf{f}})^{\top} H(\mathbf{f}-\hat{\mathbf{f}})\right)d\boldsymbol{f}\\
+\end{equation}
+$$<p>Now, computing the log marginal likelihood as suggested in section 3.4.4 of <a href="https://gaussianprocess.org/gpml/chapters/RW.pdf">GPML book</a>:</p>
+$$
+\begin{aligned}
+\log p(\boldsymbol{y}|X, \mathcal{M}) &amp;\sim \log \left[ \int p(\boldsymbol{y}|\boldsymbol{f}) p(\boldsymbol{f})d\boldsymbol{f}\right]\\
+&amp;= \log \left[ \int \exp\left(\boldsymbol{\psi}(\boldsymbol{f})\right)d\boldsymbol{f} \right]\\
+&amp;\thickapprox \log \left[ \int \exp\left(\boldsymbol{\psi}(\boldsymbol{\hat{f}}) -\frac{1}{2}(\mathbf{f}-\hat{\mathbf{f}})^{\top} H(\mathbf{f}-\hat{\mathbf{f}})\right)d\boldsymbol{f} \right]\\
+&amp;= \log \left[ \exp \boldsymbol{\psi}(\boldsymbol{\hat{f}}) \int exp\left(-\frac{1}{2}(\mathbf{f}-\hat{\mathbf{f}})^{\top} H(\mathbf{f}-\hat{\mathbf{f}})\right)d\boldsymbol{f}\right]\\
 &amp;= \log p(\boldsymbol{y}|\boldsymbol{\hat{f}}) + \log p(\boldsymbol{\hat{f}}) - \frac{N}{2}\log(2\pi) - \frac{1}{2}\log|H^{-1}|\\
 &amp;= \log p(\boldsymbol{y}|\boldsymbol{\hat{f}}) -\frac{1}{2}\boldsymbol{\hat{f}}^TK_{ff}^{-1}\boldsymbol{\hat{f}} - \frac{1}{2}\log|K_{ff}| - \frac{N}{2}\log(2\pi) - \frac{1}{2}\log|H^{-1}| - \frac{N}{2}\log(2\pi)
-\end{align}<p>Our final optimization algorithm would be as following:</p>
+\end{aligned}
+$$<p>Our final optimization algorithm would be as following:</p>
 <ol>
 <li>For N iterations do 2. to 4.</li>
 <li>Optimize for $\boldsymbol{\hat{f}}$ with M iterations using standard MAP estimation (maybe use non-centered parametrization).</li>
@@ -359,10 +389,12 @@ p(\boldsymbol{f}^*|X^*, \boldsymbol{y}, X) \sim \mathcal{N}(\boldsymbol{m}_{f^*}
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Appendix">
 <a class="anchor" href="#Appendix" aria-hidden="true"><span class="octicon octicon-link"></span></a>Appendix<a class="anchor-link" href="#Appendix"> </a>
-</h2>\begin{equation}
+</h2>$$
+\begin{equation}
 \int \mathcal{N}(\boldsymbol{y}|W\boldsymbol{x}+\boldsymbol{b}, \Sigma) \mathcal{N}(\boldsymbol{x}|\boldsymbol{\mu}, K) = \mathcal{N}(\boldsymbol{y}|W\boldsymbol{\mu}+b, WKW^T+\Sigma)
 \tag{int gaussians}
 \end{equation}
+$$
 </div>
 </div>
 </div>
