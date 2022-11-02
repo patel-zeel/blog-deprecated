@@ -171,9 +171,9 @@ window.onload = wrap_img;
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>I recently read a compact and clean explanation of SVGP in the following blog post by <a href="https://martiningram.github.io/about/">Martin Ingram</a>:</p>
 <blockquote>
-<p><a href="https://martiningram.github.io/scalable-gp/">Deriving the objective in Hensman et al. 2015</a>
-Now, I am attempting to implement a practical code from scratch for the same (What is practical about it? Sometimes math does not simply translate to code without some careful modifications). I am assuming that you have read the blog post cited above before moving further. Let's go for coding!</p>
+<p><a href="https://martiningram.github.io/scalable-gp/">Deriving the objective in Hensman et al. 2015</a></p>
 </blockquote>
+<p>Now, I am attempting to implement a practical code from scratch for the same (What is practical about it? Sometimes math does not simply translate to code without careful modifications). I am assuming that you have read the blog post cited above before moving further. Let's go for coding!</p>
 
 </div>
 </div>
@@ -487,7 +487,7 @@ $$
 K &amp;= diag(\boldsymbol{\sigma})\Sigma diag(\boldsymbol{\sigma})\\
   &amp;= diag(\boldsymbol{\sigma})LL^T diag(\boldsymbol{\sigma})
 \end{aligned}
-$$<p>Where, $\Sigma$ is a correlation matrix, $L$ is a lower triangular cholesky decomposition of $\Sigma$ and $\boldsymbol{\sigma}$ is the variance vector. We can use <code>tfb.CorrelationCholesky</code> to generate $L$ from a unconstrained vector:</p>
+$$<p>Where, $\Sigma$ is a correlation matrix, $L$ is a lower triangular cholesky decomposition of $\Sigma$ and $\boldsymbol{\sigma}$ is the variance vector. We can use <code>tfb.CorrelationCholesky</code> to generate $L$ from an unconstrained vector:</p>
 
 </div>
 </div>
@@ -500,8 +500,8 @@ $$<p>Where, $\Sigma$ is a correlation matrix, $L$ is a lower triangular cholesky
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">random_vector</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,))</span>
-<span class="n">chol</span> <span class="o">=</span> <span class="n">tfb</span><span class="o">.</span><span class="n">CorrelationCholesky</span><span class="p">()(</span><span class="n">random_vector</span><span class="p">)</span>
-<span class="n">correlation</span> <span class="o">=</span> <span class="n">chol</span><span class="nd">@chol</span><span class="o">.</span><span class="n">T</span>
+<span class="n">corr_chol</span> <span class="o">=</span> <span class="n">tfb</span><span class="o">.</span><span class="n">CorrelationCholesky</span><span class="p">()(</span><span class="n">random_vector</span><span class="p">)</span>
+<span class="n">correlation</span> <span class="o">=</span> <span class="n">corr_chol</span><span class="nd">@corr_chol</span><span class="o">.</span><span class="n">T</span>
 <span class="n">correlation</span>
 </pre></div>
 
@@ -685,12 +685,13 @@ $$<p>Note that, $p(y_i| f_i, \theta)$ can be any likelihood depending upon the p
 <p>We need to sample $f_i$ from $q(f_i | \eta, \theta)$ which has the following form:</p>
 $$
 \begin{aligned}
+q(u) &amp;\sim \mathcal{N}(\boldsymbol{m}, S)\\
 q(f_i | \eta, \theta) &amp;\sim \mathcal{N}(\mu_i, \sigma_i^2)\\
-\mu_i &amp;= Am\\
+\mu_i &amp;= A\boldsymbol{m}\\
 \sigma_i^2 &amp;= K_{ii} + A(S - K_{mm})A^T\\
 A &amp;= K_{im}K_{mm}^{-1}
 \end{aligned}
-$$<p>Note that matrix inversion is often unstable and thus we will use cholesky tricks here to compute $A$.</p>
+$$<p>Note that matrix inversion is often unstable with <code>jnp.linalg.inv</code> and thus we will use cholesky tricks to compute $A$.</p>
 
 </div>
 </div>
@@ -786,7 +787,7 @@ $$<p>Note that matrix inversion is often unstable and thus we will use cholesky 
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We can use <code>jax.vmap</code> to compute log_likelihood over a batch. We can leverage the stochastic variational inference following section 10.3.1 (Eq. 10.108) from <a href="https://probml.github.io/pml-book/book2.html">pml book2</a>. Ultimately, in each iteration, we need to multiply the batch log likelihood with $\frac{N}{B}$ to get an unbiased minibatch approximation where $N$ is size of the dataset and $B$ is batch size.</p>
+<p>We can use <code>jax.vmap</code> to compute log_likelihood over a batch. With that, we can leverage the stochastic variational inference following section 10.3.1 (Eq. 10.108) from <a href="https://probml.github.io/pml-book/book2.html">pml book2</a>. Basically, in each iteration, we need to multiply the batch log likelihood with $\frac{N}{B}$ to get an unbiased minibatch approximation where $N$ is size of the full dataset and $B$ is the batch size.</p>
 
 </div>
 </div>
