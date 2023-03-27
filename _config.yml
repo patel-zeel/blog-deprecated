@@ -37,10 +37,10 @@ url: "https://patel-zeel.github.io" # the base hostname & protocol for your site
 baseurl: "/blog" # the subpath of your site, e.g. "/blog".
 
 # Github and twitter are optional:
-# minima:
-#   social_links:
-#     twitter: fastdotai
-#     github: fastai
+minima:
+  social_links:
+    { platform: twitter,  user_url: "https://twitter.com/patel_zeel_" }
+    { platform: github,  user_url: "https://github.com/patel-zeel/" }
 
 # Set this to true to get LaTeX math equation support
 use_math: true
